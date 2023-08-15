@@ -1,0 +1,108 @@
+body{
+    margin-top: 20px;
+    min-height: 500px;
+    margin-bottom: 50px;
+}
+
+.titulo{    
+    font-size: 2rem;
+    color: #243363;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.centrar{
+    text-align: -webkit-center;
+    padding-bottom: 15px;
+}
+
+.grupo{
+    display: flex;
+    min-height: 70vh;
+    background-image: url("https://www.bienestar.espol.edu.ec/sites/default/files/d9/bici.jpeg");
+    background-size: cover;
+    background-position: top;
+    max-width: 1024px;    
+}
+
+#botonEstudiante,#botonStaff{
+    width: 50%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#botonEstudiante{
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+#botonStaff{
+    color: #eee;
+    background-color: rgba(66, 66, 66, 0.5);
+}
+
+#botonEstudiante div:hover {
+    border-bottom: 2px solid #333; /* Agregar subrayado al pasar el mouse */
+}
+#botonStaff div:hover{
+    border-bottom: 2px solid #eee; /* Agregar subrayado al pasar el mouse */
+}
+
+.container{
+    max-width: 1300px;
+    text-align-last: left;
+    padding: 15px 0px;
+}
+
+@media (max-width: 1400px) {
+    .container{
+        max-width: 1100px;
+    }
+
+    @media (max-width: 1200px) {
+        .grupo{
+            max-width: 916px;
+        }
+        .container{
+            max-width: 930px;
+        }
+
+        @media (max-width: 992px) {
+            .grupo{
+                max-width: 676px;
+                min-height: 70vh;
+            }
+            .container{
+                max-width: 700px;
+                font-size: 13px;
+            }
+
+            @media (max-width: 768px) {
+                .grupo{
+                    max-width: 516px;
+                    min-height: 50vh;
+                }
+                .container{
+                    max-width: 520px;
+                    font-size: 10px;
+                }
+
+                @media (max-width: 575px) {
+                    .grupo{
+                        margin: 10px;
+                        min-height: 40vh;
+                        max-width: 551px;
+                    }
+                    .container{
+                        max-width: 500px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

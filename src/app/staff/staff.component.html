@@ -1,0 +1,27 @@
+<app-header></app-header>
+<body>
+    <h1 class="titulo">DEMANDA DE BICICLETAS DEL STAFF</h1>
+    <div class="container">
+        <form [formGroup]="dateTimeForm" (ngSubmit)="onSubmit()" class="formulario">
+            <label for="datetimeInicio">Fecha y Hora de Inicio:</label>
+            <input type="datetime-local" id="datetimeInicio" formControlName="datetimeInicio">
+            <div *ngIf="dateTimeForm.get('datetimeInicio')!.hasError('required')" class="error-message">
+                La hora de inicio es obligatoria.
+            </div>
+
+            <label for="datetimeFin">Fecha y Hora de Fin:</label>
+            <input type="datetime-local" id="datetimeFin" formControlName="datetimeFin">
+            <div *ngIf="dateTimeForm.get('datetimeFin')!.hasError('required')" class="error-message">
+                La hora de fin es obligatoria.
+            </div>
+            <div *ngIf="dateTimeForm.hasError('dateRangeInvalid')" class="error-message">
+                La hora de fin debe ser después de la hora de inicio.
+            </div>
+
+            <div class="submit">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+</body>
+<app-footer></app-footer>
