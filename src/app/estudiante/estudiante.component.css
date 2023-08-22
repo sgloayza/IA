@@ -131,7 +131,10 @@ body {
     padding: 20px;
 }
 
-
+.containerTabla {
+    max-height: calc(100vh - 200px); /* Ajusta la altura máxima según sea necesario */
+}
+  
 @media (max-width: 1400px) {
 
     .container,
