@@ -23,5 +23,27 @@
             </div>
         </form>
     </div>
+    <div class="containerTabla">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="numeroEstacion">
+            <mat-header-cell *matHeaderCellDef>Número de Estación</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.numeroEstacion }}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="fecha">
+            <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.fecha }}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="numeroEntero">
+            <mat-header-cell *matHeaderCellDef>Número Entero</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.numeroEntero }}</mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
 </body>
 <app-footer></app-footer>

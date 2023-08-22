@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "https://bike-loans-server-pr-1.onrender.com/predict",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }
+  
