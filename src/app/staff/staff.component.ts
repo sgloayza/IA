@@ -105,8 +105,8 @@ export class StaffComponent implements OnInit {
           1,
           2
         ],
-        "start_datetime": "2023-05-17 15:00:00", //this.formatDate(formData.datetimeInicio),
-        "end_datetime": "2023-05-19 13:00:00" //this.formatDate(formData.datetimeFin)
+        "start_datetime": this.formatDate(formData.datetimeInicio), //"2023-05-17 15:00:00", 
+        "end_datetime": this.formatDate(formData.datetimeFin) //"2023-05-19 13:00:00"
       };
       
       console.log(requestData," AAAAAAAAAAA");
