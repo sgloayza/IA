@@ -4,7 +4,7 @@ body{
     margin-bottom: 50px;
 }
 
-.titulo{    
+.titulo{
     font-size: 2rem;
     color: #243363;
     text-align: center;
@@ -22,10 +22,10 @@ body{
     background-image: url("https://www.bienestar.espol.edu.ec/sites/default/files/d9/bici.jpeg");
     background-size: cover;
     background-position: top;
-    max-width: 1024px;    
+    max-width: 1024px;
 }
 
-#botonEstudiante,#botonStaff{
+#divBotonEstudiante,#divBotonStaff{
     width: 50%;
     justify-content: center;
     display: flex;
@@ -34,13 +34,28 @@ body{
     cursor: pointer;
 }
 
-#botonEstudiante{
+#divBotonEstudiante{
     color: #333;
     background-color: rgba(255, 255, 255, 0.5);
 }
-#botonStaff{
+#divBotonStaff{
     color: #eee;
     background-color: rgba(66, 66, 66, 0.5);
+}
+
+#botonEstudiante{
+  background-color: #2b4373eb;
+  padding: 10px;
+  border-radius: 10px;
+  color: #ffffff;
+  width: 7vw;
+}
+#botonStaff{
+  background-color: #ffffffeb;
+  padding: 10px;
+  border-radius: 10px;
+  color: #2b4373;
+  width: 7vw;
 }
 
 #botonEstudiante div:hover {
