@@ -14,6 +14,7 @@ interface StationData {
   styleUrls: ['./estudiante.component.css']
 })
 export class EstudianteComponent implements OnInit  {
+  isLoading = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   dateTimeForm!: FormGroup;
@@ -28,11 +29,11 @@ export class EstudianteComponent implements OnInit  {
       datetimeFin: new FormControl('', [Validators.required]),
       numeroEstacion: new FormControl('', [Validators.required])
     }, { validators: this.dateValidation });
-    
+
     this.dataSource.paginator = this.paginator;
 
 
-    /*    
+    /*
     //PRUEBA GET
     fetch("http://localhost:5000/")
       .then(resultado => resultado.json())
@@ -49,9 +50,9 @@ export class EstudianteComponent implements OnInit  {
       "start_datetime": "2023-05-17 15:00:00",
       "end_datetime": "2023-05-19 13:00:00"
     };
-    
+
     console.log(requestData);
-    
+
     fetch('http://localhost:5000/predict', {
       method: 'POST',
       body: JSON.stringify(requestData), // Convertir a JSON string
@@ -79,33 +80,35 @@ export class EstudianteComponent implements OnInit  {
 
   formatDate(dateTime:Date) {
     const date = new Date(dateTime);
-  
+
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-  
+
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 
   onSubmit() {
     if (this.dateTimeForm.valid) {
+      this.isLoading = true;
+
       const formData = this.dateTimeForm.value;
       console.log('Datos del formulario:', formData);
-      
+
       const requestData = {
         "station_ids": [
           1,
           2
         ],
-        "start_datetime": this.formatDate(formData.datetimeInicio), //"2023-05-17 15:00:00", 
+        "start_datetime": this.formatDate(formData.datetimeInicio), //"2023-05-17 15:00:00",
         "end_datetime": this.formatDate(formData.datetimeFin) //"2023-05-19 13:00:00"
       };
-      
+
       console.log(requestData," AAAAAAAAAAA");
-      
+
       fetch('http://localhost:5000/predict', {
         method: 'POST',
         body: JSON.stringify(requestData),
@@ -124,7 +127,7 @@ export class EstudianteComponent implements OnInit  {
         //solo estacion SELECCIONADA
         const stationId = parseInt(formData.numeroEstacion); // Estación SELECCIONADA
         const stationData = dataFromServer.stations[stationId];
-        
+
         for (const date in stationData) {
           transformedData.push({
             numeroEstacion: stationId,
@@ -138,9 +141,13 @@ export class EstudianteComponent implements OnInit  {
       })
       .catch(error => {
         console.log("Error:", error);
+      })
+      .finally(() => {
+        this.isLoading = false;
       });
 
     } else {
+      this.isLoading = false;
       console.log('Formulario inválido. Por favor, complete los campos correctamente.');
     }
   }

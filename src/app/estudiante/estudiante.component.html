@@ -4,20 +4,20 @@
     <div class="container">
         <form [formGroup]="dateTimeForm" (ngSubmit)="onSubmit()" class="formulario">
             <label for="datetimeInicio">Fecha y Hora de Inicio:</label>
-            <input type="datetime-local" id="datetimeInicio" formControlName="datetimeInicio">
+            <input type="datetime-local" id="datetimeInicio" step="3600" formControlName="datetimeInicio">
             <div *ngIf="dateTimeForm.get('datetimeInicio')!.hasError('required')" class="error-message">
                 La hora de inicio es obligatoria.
             </div>
 
             <label for="datetimeFin">Fecha y Hora de Fin:</label>
-            <input type="datetime-local" id="datetimeFin" formControlName="datetimeFin">
+            <input type="datetime-local" id="datetimeFin" step="3600" formControlName="datetimeFin">
             <div *ngIf="dateTimeForm.get('datetimeFin')!.hasError('required')" class="error-message">
                 La hora de fin es obligatoria.
             </div>
             <div *ngIf="dateTimeForm.hasError('dateRangeInvalid')" class="error-message">
                 La hora de fin debe ser después de la hora de inicio.
             </div>
-            
+
             <label for="numeroEstacion">Número de Estación:</label>
             <select id="numeroEstacion" formControlName="numeroEstacion">
                 <option value="1">Estación 1</option>
@@ -38,21 +38,24 @@
             <mat-header-cell *matHeaderCellDef>Número de Estación</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.numeroEstacion }}</mat-cell>
           </ng-container>
-      
+
           <ng-container matColumnDef="fecha">
             <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.fecha }}</mat-cell>
           </ng-container>
-      
+
           <ng-container matColumnDef="numeroEntero">
             <mat-header-cell *matHeaderCellDef>Número Entero</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.numeroEntero }}</mat-cell>
           </ng-container>
-      
+
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>      
+    </div>
 </body>
 <!-- <app-footer></app-footer> -->
+<div class="overlay" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>

@@ -17,6 +17,8 @@ import { FooterComponent } from './footer/footer.component';
 import { EstudianteComponent } from './estudiante/estudiante.component';
 import { StaffComponent } from './staff/staff.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderComponent } from './loader/loader.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Importa el módulo
 
 
 
@@ -27,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     FooterComponent,
     EstudianteComponent,
-    StaffComponent
+    StaffComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatTableModule,
     HttpClientModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
