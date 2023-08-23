@@ -117,10 +117,11 @@ body {
 .containerTabla {
     max-width: 1300px;
     text-align-last: left;
-    max-width: 400px;
     margin: 0 auto;
     margin-top: 10px;
     padding: 20px;
+    max-height: calc(100vh - 200px);
+    /* Ajusta la altura máxima según sea necesario */
 }
 
 
@@ -183,4 +184,19 @@ body {
             }
         }
     }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Color oscuro semi-transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    /* Asegurarse de que esté en la parte superior */
 }

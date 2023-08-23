@@ -48,9 +48,7 @@ export class StaffComponent implements OnInit {
       "start_datetime": "2023-05-17 15:00:00",
       "end_datetime": "2023-05-19 13:00:00"
     };
-
     console.log(requestData);
-
     fetch('http://localhost:5000/predict', {
       method: 'POST',
       body: JSON.stringify(requestData), // Convertir a JSON string
@@ -63,20 +61,44 @@ export class StaffComponent implements OnInit {
     */
   }
 
-
-
-
-
-
-
-
   dateValidation(formGroup: FormGroup) {
     const datetimeInicio = formGroup.get('datetimeInicio')?.value;
     const datetimeFin = formGroup.get('datetimeFin')?.value;
-
+    
     if (datetimeInicio && datetimeFin) {
-      if (datetimeFin <= datetimeInicio) {
+      const startDatetime = new Date(datetimeInicio);
+      const endDatetime = new Date(datetimeFin);            
+      startDatetime.setMinutes(0);   // Establece los minutos en 0
+      startDatetime.setSeconds(0);   // Establece los segundos en 0
+
+      // Calcular horas laborales trabajadas
+      const startHour = 7; // 7 am
+      const endHour = 17;  // 5 pm
+      const millisecondsInHour = 60 * 60 * 1000; // Milisegundos en una hora      
+      const startTime = startDatetime.getTime();
+      const endTime = endDatetime.getTime();      
+      let workingHours = 0;
+      if (endTime > startTime) {
+        for (let currentTime = startTime; currentTime < endTime; currentTime += millisecondsInHour) {
+          const currentHour = new Date(currentTime).getHours();
+          
+          if (currentHour >= startHour && currentHour < endHour) {
+            workingHours++;
+          }
+        }
+      }
+      
+      //validar que la fecha de fin sea despues de la fecha de inicio
+      if (endDatetime <= startDatetime) {
+        console.log("FECHA",endDatetime <= startDatetime)
         return { dateRangeInvalid: true };
+      }
+
+      //validar que las horas trabajadas sean menos o igual a 10
+      if (workingHours > 10) {
+        console.log("HORA",workingHours <= 10,"HORAS TRABAJADAS",workingHours)
+        console.log(workingHours,"HORAS TRABAJADAS")
+        return { minTimeDifferenceNotMet: true };
       }
     }
 
@@ -90,15 +112,15 @@ export class StaffComponent implements OnInit {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const minutes = "00";
     const seconds = String(date.getSeconds()).padStart(2, '0');
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 
   onSubmit() {
-    this.isLoading = true;
     if (this.dateTimeForm.valid) {
+      this.isLoading = true;
       const formData = this.dateTimeForm.value;
       console.log('Datos del formulario:', formData);
 
@@ -149,6 +171,8 @@ export class StaffComponent implements OnInit {
       });
 
     } else {
+      this.dataSource = new MatTableDataSource<any>([]); // Inicializar con una matriz vacía
+      this.isLoading = false;
       console.log('Formulario inválido. Por favor, complete los campos correctamente.');
     }
   }
