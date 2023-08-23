@@ -163,13 +163,13 @@ export class StaffComponent implements OnInit {
 
         // Asignar los datos a la fuente de datos de la tabla
         this.dataSource.data = transformedData;
+        this.dataSource.paginator = this.paginator;
       })
       .catch(error => {
         console.log("Error:", error);
       }).finally(() => {
         this.isLoading = false;
       });
-
     } else {
       this.dataSource = new MatTableDataSource<any>([]); // Inicializar con una matriz vacía
       this.isLoading = false;
