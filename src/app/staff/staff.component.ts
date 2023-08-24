@@ -14,12 +14,13 @@ interface StationData {
   styleUrls: ['./staff.component.css']
 })
 export class StaffComponent implements OnInit {
-  isLoading = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  
+  isLoading = false;
   dateTimeForm!: FormGroup;
   displayedColumns: string[] = ['numeroEstacion', 'fecha', 'numeroEntero'];
   dataSource = new MatTableDataSource<any>([]); // Inicializar con una matriz vacía
+  currentDate: string = this.formatDate(new Date());
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 

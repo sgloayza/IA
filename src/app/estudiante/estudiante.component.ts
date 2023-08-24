@@ -14,12 +14,13 @@ interface StationData {
   styleUrls: ['./estudiante.component.css']
 })
 export class EstudianteComponent implements OnInit  {
-  isLoading = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  isLoading = false;
   dateTimeForm!: FormGroup;
   displayedColumns: string[] = ['numeroEstacion', 'fecha', 'numeroEntero'];
   dataSource = new MatTableDataSource<any>([]); // Inicializar con una matriz vacía
+  currentDate: string = this.formatDate(new Date());
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
@@ -121,6 +122,8 @@ export class EstudianteComponent implements OnInit  {
 
   onSubmit() {
     if (this.dateTimeForm.valid) {
+      const currentDateTime = new Date(); // Obtener la fecha y hora actual
+
       this.isLoading = true;
       const formData = this.dateTimeForm.value;
       console.log('Datos del formulario:', formData);
