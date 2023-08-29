@@ -5,7 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Members:
 - Willy Mateo
-- Sandra Loaiza
+- Sandra Loayza
 - Kevin Chevez
 
 ## Development server
