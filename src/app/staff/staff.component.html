@@ -20,7 +20,7 @@
             <div *ngIf="dateTimeForm.hasError('minTimeDifferenceNotMet')" class="error-message">
                 La diferencia entre las fechas debe ser máximo 10 horas.
             </div>
-            
+
             <div class="submit">
                 <button type="submit">Enviar</button>
             </div>
@@ -30,7 +30,9 @@
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="numeroEstacion">
             <mat-header-cell *matHeaderCellDef>Número de Estación</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.numeroEstacion }}</mat-cell>
+            <!-- If element.numeroEstacion is equal to 1 use class stationOneRow else use stationTwoRow -->
+            <mat-cell *matCellDef="let element" [ngClass]="{'stationOneRow': element.numeroEstacion == 1, 'stationTwoRow': element.numeroEstacion == 2}">{{ element.numeroEstacion }}</mat-cell>
+            <!-- <mat-cell *matCellDef="let element">{{ element.numeroEstacion }}</mat-cell> -->
           </ng-container>
 
           <ng-container matColumnDef="fecha">
@@ -44,7 +46,7 @@
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-row ngClass="" *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>

@@ -200,3 +200,19 @@ body {
     z-index: 9999;
     /* Asegurarse de que esté en la parte superior */
 }
+
+.stationOneRow {
+  color: #007bff;
+  font-weight: bold;
+}
+.stationOneRow:hover {
+  color: #0056b3;
+}
+
+.stationTwoRow {
+  color: #6c757d;
+  font-weight: bold;
+}
+.stationTwoRow:hover {
+  color: #5a6268;
+}
